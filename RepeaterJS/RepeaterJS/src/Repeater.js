@@ -4,26 +4,51 @@
         data: [],
         onItemCreating: function (sender, eventArgs) {
             return true;
-        }
+        },
+        commands: []
     };
 
     function Repeater(options) {
 
         var parentElement = this;
 
-        var settings = $.extend({}, options);
+        var settings = $.extend({}, defaults, options);
 
-        var itemTemplateHtml = parentElement.find('[data-template]').first().html();
+        var itemTemplateHtml = parentElement.find('[data-item-template]').first().html();
 
         $.each(settings.data, function (key, value) {
 
-            var RepeaterItem = $(itemTemplateHtml);
+            var repeaterItem = $(itemTemplateHtml);
 
             var evtArgs = {
-                parent: parentElement
+                parent: parentElement,
+                data: value
             };
 
-            settings.onItemCreating()
+            var containerlength = repeaterItem.filter('[data-item-container]').length;
+
+            if (containerlength != 1) {
+                throw "Elements must be nested in data-item-container and only one data-item-container is allowed.";
+            }
+
+            if (settings.onItemCreating(repeaterItem, evtArgs)) {
+
+                var elements = repeaterItem.find('[data-item-property]');
+
+                $.each(elements, function (elekey, element) {
+
+                    var propAttr = $(element).attr('data-item-property');
+
+                    if (propAttr === '$root') {
+                        $(element).text(value);
+                    } else if (propAttr && propAttr.length) {
+                        $(element).text(value[propAttr]);
+                    }
+
+                    $(parentElement).append($(element));
+                });
+
+            }
 
         });
     }

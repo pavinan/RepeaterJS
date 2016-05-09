@@ -1,12 +1,29 @@
 ﻿(function ($) {
 
+    var defaults = {
+        data: [],
+        onItemCreating: function (sender, eventArgs) {
+            return true;
+        }
+    };
+
     function Repeater(options) {
+
+        var parentElement = this;
 
         var settings = $.extend({}, options);
 
-        var itemTemplate = $($(this).find('[data-template]').first().html());
+        var itemTemplateHtml = parentElement.find('[data-template]').first().html();
 
         $.each(settings.data, function (key, value) {
+
+            var RepeaterItem = $(itemTemplateHtml);
+
+            var evtArgs = {
+                parent: parentElement
+            };
+
+            settings.onItemCreating()
 
         });
     }

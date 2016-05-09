@@ -40,9 +40,9 @@
                     var propAttr = $(element).attr('data-item-property');
 
                     if (propAttr === '$root') {
-                        $(element).text(value);
+                        $(element).html(value);
                     } else if (propAttr && propAttr.length) {
-                        $(element).text(value[propAttr]);
+                        $(element).html(value[propAttr]);
                     }
 
                     $(parentElement).append($(element));
@@ -66,10 +66,14 @@ options = {
 
     onItemCreating: function(sender, eventArgs) : true|false,
 
-    itemClicked: function(sender,eventArgs) : undefined,
+    itemClicked: function(sender,eventArgs) : undefined, -- not implemented
 
+}
 
-
+commandObject = {
+    type: eventtype like click, change etc
+    name: name of command,
+    handler: function (sender, eventArgs)
 }
 
 */

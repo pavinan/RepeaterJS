@@ -14,7 +14,7 @@
     <div id="myrpt">
         <div data-item-template="" style="display:none">
             <div data-item-container="">
-                <p data-item-property="$root"></p>
+                <p data-item-property="name"></p>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
     <script type="text/javascript">
 
         $('#myrpt').Repeater({
-            data: ["a", "b"]
+            data: [{ name: 'a' }, { name: 'b' }]
         });
     </script>
 </body>

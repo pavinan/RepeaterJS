@@ -20,16 +20,16 @@
 
             var repeaterItem = $(itemTemplateHtml);
 
-            var evtArgs = {
-                parent: parentElement,
-                data: value
-            };
-
             var containerlength = repeaterItem.filter('[data-item-container]').length;
 
             if (containerlength != 1) {
                 throw "Elements must be nested in data-item-container and only one data-item-container is allowed.";
             }
+
+            var evtArgs = {
+                parent: parentElement,
+                data: value
+            };
 
             if (settings.onItemCreating(repeaterItem, evtArgs)) {
 
@@ -73,7 +73,7 @@ options = {
 commandObject = {
     type: eventtype like click, change etc
     name: name of command,
-    handler: function (sender, eventArgs)
+    handler: function (sender, eventArgs): true|false -- not decided
 }
 
 */

@@ -97,12 +97,13 @@ options = {
 
     itemClicked: function(sender,eventArgs) : undefined, -- not implemented
 
+    commands : []
+
 }
 
 commandObject = {
     type: eventtype like click, change etc
     name: name of command,
-    handler: function (sender, eventArgs): true|false -- not decided
-}
+    handler: function (sender, eventArgs): true|false
 
 */

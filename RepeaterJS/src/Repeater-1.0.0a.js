@@ -2,6 +2,7 @@
 
     var defaults = {
         data: [],
+        commandAttrName: "data-command",
         onItemCreating: function (sender, eventArgs) {
             return true;
         },
@@ -45,6 +46,32 @@
                         $(element).html(value[propAttr]);
                     }
 
+                    var command = $(element).attr(settings.commandAttrName);
+
+                    if (command && command.trim().length) {
+
+                        command = command.trim();
+
+                        var commandObject = settings.commands.find(function (commandObject) {
+
+                            return commandObject.name == command;
+
+                        });
+
+                        if (commandObject) {
+
+                            $(element).on(commandObject.type + '.rptEvents', function (e) {
+
+                                var eveArgs = { data: value, e: e };
+                                
+                                return commandObject.handler(element, eveArgs);
+
+                            });
+
+                        }
+
+                    }
+
                     $(parentElement).append($(element));
                 });
 
@@ -63,6 +90,8 @@
 options = {
 
     data: [],
+
+    commandAttrName :"data-command",
 
     onItemCreating: function(sender, eventArgs) : true|false,
 

@@ -14,7 +14,7 @@
     <div id="myrpt">
         <div data-item-template="" style="display:none">
             <div data-item-container="">
-                <p data-item-property="name"></p>
+                <p data-item-property="name" data-command="myclick"></p>
             </div>
         </div>
     </div>
@@ -22,7 +22,18 @@
     <script type="text/javascript">
 
         $('#myrpt').Repeater({
-            data: [{ name: 'apple' }, { name: 'ball' }, { name: 'cat' }]
+            data: [{ name: 'apple' }, { name: 'ball' }, { name: 'cat' }],
+            commands: [
+                {
+                    type: 'click',
+                    name: 'myclick',
+                    handler: function (a, b) {
+
+                        alert('')
+                        false;
+                    }
+                }
+            ]
         });
     </script>
 </body>
